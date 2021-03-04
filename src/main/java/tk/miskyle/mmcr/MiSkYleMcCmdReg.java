@@ -33,6 +33,14 @@ public class MiSkYleMcCmdReg {
    * @return 若未通过构造器创建则返回null
    */
   public static MiSkYleMcCmdReg getDefault() {
+    if (mmcr == null) {
+      mmcr = new MiSkYleMcCmdReg(
+          "You Not A Player!",
+          "You Have Not Permission!",
+          "Command is Wrong!",
+          new HashMap<>()
+      );
+    }
     return mmcr;
   }
 
