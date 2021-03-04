@@ -85,9 +85,12 @@ public class MiSkYleCommand implements CommandExecutor, TabExecutor {
       Cmd cmd = method.getAnnotation(Cmd.class);
       if (args.length < cmd.args().length
               || !compareSubCommand(args, cmd.subCmd())
-              || !cmd.permission().isEmpty() && !sender.hasPermission(cmd.permission())
               || !cmd.unlimitedLength() && args.length != cmd.args().length) {
         continue;
+      }
+      if (!cmd.permission().isEmpty() && !sender.hasPermission(cmd.permission())) {
+        sender.sendMessage(MiSkYleMcCmdReg.getDefault().msgNoPermision);
+        return true;
       }
       if (cmd.needPlayer() && (sender instanceof Player)) {
         try {
